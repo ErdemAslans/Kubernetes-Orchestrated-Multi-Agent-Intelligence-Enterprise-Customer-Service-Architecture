@@ -1,0 +1,2 @@
+# Kubernetes-Orchestrated-Multi-Agent-Intelligence-Enterprise-Customer-Service-Architecture
+Production-ready multi-agent customer service system built with Google Agent Development Kit and orchestrated through Kubernetes for enterprise-scale intelligent customer interactions. This project demonstrates how modern AI agent frameworks combined with container orchestration can transform traditional customer support into a dynamic, 

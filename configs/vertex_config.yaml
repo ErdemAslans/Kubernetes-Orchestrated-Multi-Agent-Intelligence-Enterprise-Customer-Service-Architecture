@@ -1,0 +1,54 @@
+# Vertex AI Configuration
+vertex_ai:
+  project_id: ${GOOGLE_CLOUD_PROJECT}
+  location: ${VERTEX_AI_LOCATION}
+  
+  # Model settings
+  models:
+    default: gemini-1.5-pro
+    available:
+      - gemini-1.5-pro
+      - gemini-1.5-flash
+      - gemini-1.0-pro
+  
+  # Generation defaults
+  generation_config:
+    temperature: 0.5
+    max_output_tokens: 2048
+    top_p: 0.95
+    top_k: 40
+    
+  # Safety settings
+  safety_settings:
+    - category: HARM_CATEGORY_HATE_SPEECH
+      threshold: BLOCK_MEDIUM_AND_ABOVE
+    - category: HARM_CATEGORY_DANGEROUS_CONTENT
+      threshold: BLOCK_MEDIUM_AND_ABOVE
+    - category: HARM_CATEGORY_SEXUALLY_EXPLICIT
+      threshold: BLOCK_MEDIUM_AND_ABOVE
+    - category: HARM_CATEGORY_HARASSMENT
+      threshold: BLOCK_MEDIUM_AND_ABOVE
+  
+  # Rate limiting
+  rate_limits:
+    requests_per_minute: 60
+    requests_per_hour: 1000
+    tokens_per_minute: 100000
+    
+  # Retry configuration
+  retry:
+    max_attempts: 3
+    initial_delay: 1
+    max_delay: 10
+    multiplier: 2
+    
+# Authentication
+auth:
+  use_application_default: true
+  service_account_path: ${GOOGLE_APPLICATION_CREDENTIALS}
+  
+# Monitoring
+monitoring:
+  enable_metrics: true
+  enable_tracing: true
+  sample_rate: 0.1

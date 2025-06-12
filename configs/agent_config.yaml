@@ -1,0 +1,70 @@
+# Agent Configuration
+agents:
+  customer_service:
+    model: gemini-1.5-pro
+    temperature: 0.3
+    max_output_tokens: 2048
+    top_p: 0.95
+    instances:
+      - id: cs-agent-1
+        priority: 1
+      - id: cs-agent-2
+        priority: 2
+    escalation_rules:
+      - trigger: "technical issue"
+        target: technical_support
+      - trigger: "pricing"
+        target: sales_specialist
+      - trigger: "manager"
+        target: supervisor
+    
+  technical_support:
+    model: gemini-1.5-pro
+    temperature: 0.2
+    max_output_tokens: 2048
+    top_p: 0.95
+    instances:
+      - id: tech-agent-1
+        specialization: ["software", "api"]
+      - id: tech-agent-2
+        specialization: ["hardware", "network"]
+    escalation_rules:
+      - trigger: "system outage"
+        target: development_team
+      - trigger: "data loss"
+        target: senior_technical_support
+      - trigger: "security breach"
+        target: security_team
+    
+  sales_specialist:
+    model: gemini-1.5-pro
+    temperature: 0.7
+    max_output_tokens: 2048
+    top_p: 0.95
+    instances:
+      - id: sales-agent-1
+        specialization: ["smb", "startup"]
+      - id: sales-agent-2
+        specialization: ["enterprise", "government"]
+    escalation_rules:
+      - trigger: "enterprise deal"
+        target: account_manager
+      - trigger: "custom development"
+        target: solutions_architect
+      - trigger: "legal question"
+        target: legal_team
+
+# System-wide settings
+system:
+  max_sessions_per_agent: 10
+  session_timeout_minutes: 30
+  escalation_timeout_minutes: 5
+  priority_routing_enabled: true
+  
+# Performance settings
+performance:
+  request_timeout_seconds: 30
+  max_retries: 3
+  retry_delay_seconds: 2
+  circuit_breaker_threshold: 5
+  circuit_breaker_timeout: 60
